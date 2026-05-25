@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald Regular'), local('Oswald-Regular'), url(https://themes.googleusercontent.com/static/fonts/oswald/v7/qs_6LdoYjCitupC9judWT-vvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Oswald Bold'), local('Oswald-Bold'), url(https://themes.googleusercontent.com/static/fonts/oswald/v7/dI-qzxlKVQA6TUC5RKSb37O3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #0f75a5;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.kizi_font {
+  font-family: 'Oswald', Arial;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.fl { float: left; }
+.fr { float: right; }
+.clr { clear: both; }
+
+#collections_wrapper a:hover {
+  background-position: center !important;
+}
+
+#collections_wrapper a.selected_category {
+  background-position: right !important;
+}
+
+#collections_wrapper li:hover .category_title {
+  display: block !important;
+}
+
+#thumbs_place_holder {
+  min-height: 100vh;
+}
+
+#scrolling_games_div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  max-width: calc(100vw - 60px);
+}
