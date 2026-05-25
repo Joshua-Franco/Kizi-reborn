@@ -1,0 +1,39 @@
+.game-player {
+  width: var(--game-display-width, 900px);
+  height: var(--game-display-height, 510px);
+  max-width: 100%;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+}
+
+.game-player--html5 {
+  display: block;
+}
+
+.game-player__embed {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #000;
+}
+
+.game-player__fallback {
+  color: #ccc;
+  padding: 16px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.game-player__fallback a {
+  color: #ffd500;
+}
+
+.game-player--flash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

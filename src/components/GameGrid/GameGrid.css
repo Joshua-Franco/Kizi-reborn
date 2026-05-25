@@ -1,0 +1,6 @@
+#scrolling_games_div {
+  margin: 0 auto;
+  display: grid;
+  gap: 0;
+  grid-auto-flow: dense;
+}

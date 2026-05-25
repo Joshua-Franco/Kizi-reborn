@@ -8,6 +8,12 @@ interface UserState {
   username: string
 }
 
+export interface SelectedGame {
+  slug: string
+  name: string
+  thumb: string
+}
+
 interface GameContextType {
   user: UserState
   addCoins: (amount: number) => void
@@ -15,6 +21,8 @@ interface GameContextType {
   setSearchQuery: (query: string) => void
   currentCategory: string
   setCurrentCategory: (category: string) => void
+  selectedGame: SelectedGame | null
+  setSelectedGame: (game: SelectedGame) => void
 }
 
 const defaultUser: UserState = {
@@ -31,13 +39,25 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserState>(defaultUser)
   const [searchQuery, setSearchQuery] = useState('')
   const [currentCategory, setCurrentCategory] = useState('homepage')
+  const [selectedGame, setSelectedGame] = useState<SelectedGame | null>(null)
 
   const addCoins = (amount: number) => {
     setUser((prev) => ({ ...prev, coins: prev.coins + amount }))
   }
 
   return (
-    <GameContext.Provider value={{ user, addCoins, searchQuery, setSearchQuery, currentCategory, setCurrentCategory }}>
+    <GameContext.Provider
+      value={{
+        user,
+        addCoins,
+        searchQuery,
+        setSearchQuery,
+        currentCategory,
+        setCurrentCategory,
+        selectedGame,
+        setSelectedGame,
+      }}
+    >
       {children}
     </GameContext.Provider>
   )

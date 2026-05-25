@@ -1,0 +1,64 @@
+/* Estructura del sidebar. Tamaños por #id en category-icon-sizes.css */
+
+#collections_wrapper {
+  position: relative;
+  z-index: 10;
+}
+
+#collections_wrapper ul {
+  position: absolute;
+  top: 53px;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  background: #034566;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#collections_wrapper ul.fixed-sidebar {
+  position: fixed;
+}
+
+#collections_wrapper li {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #023a57;
+}
+
+#collections_wrapper a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+}
+
+#collections_wrapper [id$='-wrap'] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+}
+
+#collections_wrapper [id$='-icon'] {
+  display: block;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  object-fit: contain;
+  object-position: center center;
+  transition: width 0.12s ease, height 0.12s ease;
+}

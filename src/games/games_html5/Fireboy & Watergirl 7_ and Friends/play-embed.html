@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Fireboy &amp; Watergirl 7: and Friends</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+    #game { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  </style>
+</head>
+<body>
+  <iframe id="game" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <script>
+    (function () {
+      function GameLoader() {
+        this.init = function () {
+          this._gameId = 'd4a3629101574bc39bd8f9d1888ca58e'
+          this._container = document.getElementById('game')
+          this._loader = { enabled: false, sdk_version: '1.15.2', _: 55 }
+          this._hasImpression = true
+          this._hasSuccess = true
+          this._insertGameSDK()
+        }
+
+        this._insertGameSDK = function () {
+          window.GD_OPTIONS = {
+            gameId: this._gameId,
+            loader: this._loader,
+            onLoaderEvent: this._onLoaderEvent.bind(this),
+            onEvent: this._onEvent.bind(this),
+          }
+          var js = document.createElement('script')
+          js.id = 'gamedistribution-jssdk'
+          js.src = 'https://html5.api.gamedistribution.com/main.min.js'
+          document.head.appendChild(js)
+        }
+
+        this._loadGame = function () {
+          if (this._container_initialized || !this._bridge) return
+
+          var data = {
+            parentURL: this._bridge.parentURL,
+            parentDomain: this._bridge.parentDomain,
+            topDomain: this._bridge.topDomain,
+            hasImpression: true,
+            loaderEnabled: false,
+            host: window.location.hostname,
+            version: '1.5.18',
+          }
+
+          var searchPart = this._bridge.exports.formatTokenURLSearch(data)
+          this._container.src =
+            'https://html5.gamedistribution.com/rvvASMiM/d4a3629101574bc39bd8f9d1888ca58e/index.html' +
+            searchPart
+          this._container.onload = this._onFrameLoaded.bind(this)
+          this._container_initialized = true
+        }
+
+        this._onLoaderEvent = function (event) {
+          if (event.name === 'LOADER_DATA') {
+            this._bridge = event.message.bridge
+            this._game = event.message.game
+            this._loadGame()
+          }
+        }
+
+        this._onEvent = function (event) {
+          if (event.name === 'SDK_GAME_START' && this._bridge) {
+            this._loadGame()
+          }
+        }
+
+        this._onFrameLoaded = function () {
+          var container = this._container
+          setTimeout(function () {
+            try {
+              container.contentWindow.focus()
+            } catch (err) {}
+          }, 100)
+        }
+      }
+
+      new GameLoader().init()
+    })()
+  </script>
+</body>
+</html>

@@ -7,6 +7,7 @@ export interface Game {
   path: string
   render_play_icon: boolean
   is_video: boolean
+  large?: boolean
 }
 
 export interface FeaturedGame {

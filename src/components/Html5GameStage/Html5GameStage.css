@@ -1,0 +1,47 @@
+.html5-game-stage {
+  width: 100%;
+  margin: 0 auto 16px;
+  text-align: center;
+}
+
+.html5-game-stage--home {
+  padding: 12px 0 8px;
+}
+
+.html5-game-stage--play {
+  margin: 0;
+}
+
+.html5-game-stage__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.html5-game-stage__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: normal;
+  color: #ffd500;
+  letter-spacing: 0.5px;
+}
+
+.html5-game-stage__play-link {
+  font-family: Oswald, Arial, sans-serif;
+  font-size: 13px;
+  color: #f99a00;
+  text-transform: uppercase;
+}
+
+.html5-game-stage__play-link:hover {
+  color: #ffd500;
+}
+
+.html5-game-stage__viewport {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

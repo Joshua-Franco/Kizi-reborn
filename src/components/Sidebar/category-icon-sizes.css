@@ -1,0 +1,45 @@
+/**
+ * Tamaño y posición por categoría y estado (1)(2)(3).
+ * Estados 1 y 2: icono centrado en la celda 60×60.
+ * Estado 3: tile completo 60×60 (seleccionado).
+ */
+
+/* --- Homepage --- */
+#category-homepage-icon[data-state='1'] { width: 32px; height: 32px; }
+#category-homepage-icon[data-state='2'] { width: 32px; height: 34px; }
+#category-homepage-icon[data-state='3'] { width: 60px; height: 60px; object-fit: fill; }
+
+/* --- Food --- */
+#category-food-icon[data-state='1'] { width: 44px; height: 28px; }
+#category-food-icon[data-state='2'] { width: 44px; height: 29px; }
+#category-food-icon[data-state='3'] { width: 60px; height: 60px; object-fit: fill; }
+
+/* --- Dress up --- */
+#category-dress-up-icon[data-state='1'] { width: 30px; height: 36px; }
+#category-dress-up-icon[data-state='2'] { width: 30px; height: 35px; }
+#category-dress-up-icon[data-state='3'] { width: 60px; height: 60px; object-fit: fill; }
+
+/* --- Racing --- */
+#category-racing-icon[data-state='1'] { width: 36px; height: 46px; }
+#category-racing-icon[data-state='2'] { width: 36px; height: 47px; }
+#category-racing-icon[data-state='3'] { width: 60px; height: 60px; object-fit: fill; }
+
+/* --- Alien --- */
+#category-alien-icon[data-state='1'] { width: 32px; height: 34px; }
+#category-alien-icon[data-state='2'] { width: 31px; height: 34px; }
+#category-alien-icon[data-state='3'] { width: 60px; height: 60px; object-fit: fill; }
+
+/* --- Strategy --- */
+#category-strategy-icon[data-state='1'] { width: 34px; height: 34px; }
+#category-strategy-icon[data-state='2'] { width: 34px; height: 35px; }
+#category-strategy-icon[data-state='3'] { width: 60px; height: 60px; object-fit: fill; }
+
+/* --- Action arcade --- */
+#category-action-arcade-icon[data-state='1'] { width: 54px; height: 58px; }
+#category-action-arcade-icon[data-state='2'] { width: 48px; height: 58px; }
+#category-action-arcade-icon[data-state='3'] { width: 60px; height: 60px; object-fit: fill; }
+
+/* --- Puzzle --- */
+#category-puzzle-icon[data-state='1'] { width: 34px; height: 30px; }
+#category-puzzle-icon[data-state='2'] { width: 34px; height: 30px; }
+#category-puzzle-icon[data-state='3'] { width: 60px; height: 60px; object-fit: fill; }

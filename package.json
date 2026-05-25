@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "download:assets": "node scripts/download-kizi-assets.mjs && node scripts/fill-missing-assets.mjs",
+    "normalize:assets": "node scripts/normalize-asset-names.mjs"
   },
   "dependencies": {
     "@ruffle-rs/ruffle": "^0.2.0",

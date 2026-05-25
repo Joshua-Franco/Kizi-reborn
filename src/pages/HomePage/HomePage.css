@@ -1,0 +1,27 @@
+.homepage-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+#selected_category_div_wrapper {
+  background: #0ea1ce;
+  box-shadow: 0 5px 5px #05436f;
+}
+
+#selected_category_div {
+  margin: 0 auto;
+}
+
+#category_banner_wrapper {
+  width: 100%;
+  text-align: center;
+}
+
+.homepage-game-stage {
+  width: 100%;
+}
+
+.game-grid-wrapper {
+  flex: 1;
+}

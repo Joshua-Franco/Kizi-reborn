@@ -1,0 +1,24 @@
+#content {
+  text-align: center;
+}
+
+#thumbs_place_holder {
+  position: relative;
+  margin-top: 53px;
+  float: right;
+  min-height: 100vh;
+  text-align: left;
+}
+
+/* Play-page: el footer queda al borde inferior del área visible */
+.route-play #thumbs_place_holder {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 53px);
+  background-color: #0f73a4;
+}
+
+.route-play #thumbs_place_holder > .play-page {
+  flex: 1 1 auto;
+  min-height: calc(100vh - 53px);
+}

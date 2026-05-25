@@ -1,0 +1,286 @@
+#header_container {
+  height: 53px;
+  min-width: 1012px;
+  background: linear-gradient(to bottom, #0ea1ce, #08769e);
+  position: fixed;
+  top: 0;
+  z-index: 15;
+  right: 0;
+  left: 0;
+}
+
+.narrow_screen #kizi_logo {
+  margin-left: 5px !important;
+}
+
+.narrow_screen #user_info_box_container,
+.narrow_screen #game_user_info_box_container {
+  margin-left: 10px !important;
+}
+
+.narrow_screen .name_and_xp {
+  padding: 0 5px !important;
+}
+
+.narrow_screen #coins_container {
+  padding-right: 5px !important;
+  padding-left: 5px !important;
+}
+
+.narrow_screen #get_coins_homepage,
+.narrow_screen #envelope,
+.narrow_screen #last_played_button {
+  width: 50px !important;
+}
+
+.narrow_screen #games_btn {
+  width: 55px !important;
+  overflow: hidden !important;
+}
+
+.narrow_screen .signup,
+.narrow_screen .login {
+  margin-left: 5px !important;
+}
+
+.narrow_screen #search_div {
+  width: 160px !important;
+  margin-right: 5px !important;
+}
+
+.narrow_screen #search_div #search {
+  width: 100px !important;
+}
+
+.narrow_screen #privacy_button,
+.narrow_screen #contact_button,
+.narrow_screen #language_box {
+  margin-right: 5px !important;
+}
+
+#user_info_box_container {
+  float: left;
+  margin-left: 15px;
+}
+
+#user_info_box_container #user_avatar_thumb {
+  position: relative;
+  float: left;
+  background-color: #003d68;
+  border: 1px solid #103154;
+  height: 38px;
+  width: 38px;
+  margin-top: 5px;
+}
+
+#user_info_box_container #user_image {
+  float: left;
+  position: relative;
+  height: 38px;
+  width: 38px;
+}
+
+#user_info_box_container .name_and_xp {
+  height: 47px;
+  float: left;
+  padding: 0 10px;
+}
+
+#user_info_box_container #coins_container {
+  float: left;
+  height: 47px;
+  border-left: 1px solid #005e8c;
+  padding-right: 7px;
+  padding-left: 8px;
+}
+
+#user_info_box_container #coins_counter {
+  background: none;
+  float: left;
+  height: 31px;
+  margin-left: 5px;
+  margin-top: 9px;
+  position: relative;
+  text-align: right;
+}
+
+#user_info_box_container .counter_cell {
+  width: 13px;
+  height: 31px;
+  text-align: center;
+  line-height: 31px;
+  float: left;
+  font-size: 22px;
+}
+
+#user_info_box_container .signup {
+  cursor: pointer;
+  float: left;
+  height: 35px;
+  background: linear-gradient(to bottom, #ffd00c, #f0b800);
+  font-size: 15px;
+  color: #8e2b00;
+  line-height: 34px;
+  text-align: center;
+  padding: 0 10px;
+  border: 1px solid #8e2b00;
+  border-radius: 10px;
+  margin-top: 6px;
+  margin-left: 10px;
+}
+
+#user_info_box_container .signup:hover {
+  background: linear-gradient(to bottom, #ffe033, #ffc800);
+}
+
+#user_info_box_container .login {
+  cursor: pointer;
+  float: left;
+  height: 35px;
+  background: linear-gradient(to bottom, #0ea1ce, #0a7da3);
+  color: #ffffff;
+  line-height: 34px;
+  padding: 0 10px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 15px;
+  border: 1px solid #103154;
+  margin-top: 6px;
+  margin-left: 10px;
+}
+
+#user_info_box_container .login:hover {
+  background: linear-gradient(to bottom, #1bb8e8, #0e90b8);
+}
+
+#usr_exp_bar {
+  height: 16px;
+  margin: 0 auto;
+  width: 98%;
+  background: #003760;
+  border-radius: 4px;
+  text-align: left;
+  position: relative;
+}
+
+#exp_bar_fill {
+  height: 14px;
+  margin: 1px;
+  background: linear-gradient(to bottom, #f5e50a, #d4b800);
+  width: 2%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 3px;
+}
+
+#exp_user_level {
+  width: 100%;
+  height: 16px;
+  line-height: 14px;
+  color: #ffffff;
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+
+#search_div {
+  position: relative;
+  width: 200px;
+  height: 41px;
+  background-color: #044267;
+  border-radius: 20px;
+  margin-top: 4px;
+  margin-right: 8px;
+}
+
+#search_div #search {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  padding-left: 15px;
+  padding-right: 35px;
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+#search_div img {
+  float: right;
+  cursor: auto;
+  margin: 1px 5px 0 0;
+  position: relative;
+  z-index: 3;
+}
+
+#get_coins_homepage {
+  float: left;
+  width: 56px;
+  height: 48px;
+  position: relative;
+  cursor: pointer;
+}
+
+.footer_nav_button {
+  width: 28px;
+  height: 28px;
+  float: right;
+}
+
+#header_right_icons {
+  margin-top: 11px;
+}
+
+#language_box {
+  position: relative;
+  float: left;
+  margin-right: 5px;
+}
+
+#language_box .flag_selector {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 50;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 4px;
+  text-align: left;
+  min-width: 120px;
+}
+
+#language_box:hover .flag_selector {
+  display: block;
+}
+
+#language_box .flag_selector div {
+  color: #044267;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
+#language_box .flag_selector div:hover {
+  background: #c0e0ee;
+}
+
+.flag_container.footer_nav_button {
+  cursor: pointer;
+  float: left;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.flag_container img {
+  margin-top: 4px;
+}
