@@ -24,7 +24,18 @@ export default function Header() {
   const coinDigits = formatCoinDigits(user.coins)
 
   return (
-    <div id="header_container" className="narrow_screen">
+    <div
+      id="header_container"
+      className="narrow_screen"
+      style={
+        {
+          '--kizi-join-btn': `url(${KIZI_UI.joinBtn})`,
+          '--kizi-join-btn-hover': `url(${KIZI_UI.joinBtnHover})`,
+          '--kizi-login-btn': `url(${KIZI_UI.loginBtn})`,
+          '--kizi-login-btn-hover': `url(${KIZI_UI.loginBtnHover})`,
+        } as React.CSSProperties
+      }
+    >
       <div className="fl">
         <a href="/">
           <img src={KIZI_UI.logo} alt="Kizi - Online Games" id="kizi_logo" />

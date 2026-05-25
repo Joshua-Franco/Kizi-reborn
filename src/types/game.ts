@@ -1,6 +1,13 @@
+export type GameEngine = 'html5' | 'flash'
+
 export interface Game {
   new?: boolean
+  /** Nombre exacto del archivo de thumb (sin extensión). */
   name: string
+  /** Archivo en src/assets/games (ej. candy-rain.jpg). */
+  fileName: string
+  /** Slug de ruta /games/:slug (derivado del fileName). */
+  slug: string
   rel_id: number
   unity: boolean
   thumb: string
@@ -8,6 +15,10 @@ export interface Game {
   render_play_icon: boolean
   is_video: boolean
   large?: boolean
+  /** Slug del juego instalado (carpeta HTML5 o SWF). */
+  installSlug: string
+  engine: GameEngine
+  playable: boolean
 }
 
 export interface FeaturedGame {

@@ -68,22 +68,36 @@ export function gameThumbBySlug(slug: string): string | undefined {
   return undefined
 }
 
+/** Nombre del archivo sin extensión, exactamente como en disco. */
+export function fileNameToLabel(fileName: string): string {
+  return fileName.replace(/\.[^.]+$/i, '')
+}
+
+/** Slug de URL derivado del nombre de archivo (cambia si renombras el archivo). */
 export function fileNameToSlug(fileName: string): string {
-  return fileName
-    .replace(/\.[^.]+$/i, '')
-    .replace(/^thumb\d+_/i, '')
+  return fileNameToLabel(fileName)
     .replace(/[^a-zA-Z0-9]+/g, '-')
     .replace(/^-|-$/g, '')
     .toLowerCase()
 }
 
+/** @deprecated Usar fileNameToLabel — mismo comportamiento. */
 export function fileNameToDisplayName(fileName: string): string {
-  let name = fileName.replace(/\.[^.]+$/i, '')
-  name = name.replace(/^thumb\d+_/i, '')
-  name = name.replace(/[_-]/g, ' ')
-  name = name.replace(/\s*\(.*?\)\s*/g, '')
-  name = name.trim()
-  return name.replace(/\b\w/g, (c) => c.toUpperCase())
+  return fileNameToLabel(fileName)
+}
+
+export function displayNameFromSlug(slug: string): string {
+  for (const fileName of listGameThumbFiles()) {
+    if (fileNameToSlug(fileName) === slug) return fileNameToLabel(fileName)
+  }
+  return slug
+}
+
+export function fileNameFromSlug(slug: string): string | undefined {
+  for (const fileName of listGameThumbFiles()) {
+    if (fileNameToSlug(fileName) === slug) return fileName
+  }
+  return undefined
 }
 
 /** Tres estados de icono de categoría: `(1).png`, `(2).png`, `(3).png` */

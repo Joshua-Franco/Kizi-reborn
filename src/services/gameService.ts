@@ -1,27 +1,39 @@
 import type { Game, HomepageGamesData } from '../types/game'
 import {
-  fileNameToDisplayName,
+  fileNameToLabel,
   fileNameToSlug,
   gameThumb,
   listGameThumbFiles,
 } from '../utils/assetCatalog'
+import {
+  isThumbPlayable,
+  resolveEngineForThumb,
+  resolveInstallSlug,
+} from '../utils/gameRegistry'
 
 function simulateNetwork<T>(data: T): Promise<T> {
   return new Promise((resolve) => setTimeout(() => resolve(data), 300))
 }
 
 const ALL_GAMES: Game[] = listGameThumbFiles().map((fileName, i) => {
-  const isThumb = /^thumb\d+_/i.test(fileName)
+  const slug = fileNameToSlug(fileName)
+  const isLargeTile = /-large\.(jpg|jpeg|png|webp)$/i.test(fileName)
+  const installSlug = resolveInstallSlug(slug)
   return {
     new: i < 5,
-    name: fileNameToDisplayName(fileName),
+    fileName,
+    name: fileNameToLabel(fileName),
+    slug,
+    installSlug,
+    engine: resolveEngineForThumb(slug),
+    playable: isThumbPlayable(slug),
     rel_id: 10000 + i,
     unity: false,
     thumb: gameThumb(fileName),
-    path: `/games/${fileNameToSlug(fileName)}`,
+    path: `/games/${slug}`,
     render_play_icon: false,
     is_video: false,
-    large: !isThumb,
+    large: isLargeTile,
   }
 })
 

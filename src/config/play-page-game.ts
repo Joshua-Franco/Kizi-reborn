@@ -2,14 +2,14 @@ import { gameThumb } from '../utils/assetCatalog'
 import { GAME_FILES_BASE } from '../utils/gameCatalog'
 
 /** Juego fijo de la play-page (HTML5 local en games_html5). */
-export const PLAY_PAGE_GAME_SLUG = 'fireboy-and-watergirl-7-and-friends'
+export const PLAY_PAGE_GAME_SLUG = 'fireboy-watergirl-7-and-friends'
 
 const FIREBOY_FOLDER = 'Fireboy & Watergirl 7_ and Friends'
 
 /** HTML mínimo sin anuncios/cookies guardados (solo carga el SDK del juego). */
 export const PLAY_PAGE_EMBED_URL = `${GAME_FILES_BASE}/games_html5/${encodeURIComponent(FIREBOY_FOLDER)}/play-embed.html`
 
-export const PLAY_PAGE_THUMB_FILE = 'thumb150_fireboy-and-watergirl-7-and-friends_150x150.jpg'
+export const PLAY_PAGE_THUMB_FILE = 'fireboy-watergirl-7-and-friends.jpg'
 
 export const PLAY_PAGE_GAME_META = {
   name: 'Fireboy & Watergirl 7: and Friends',

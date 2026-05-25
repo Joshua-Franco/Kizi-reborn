@@ -28,19 +28,66 @@
   height: 60px;
   flex-shrink: 0;
   border-bottom: 1px solid #023a57;
+  position: relative;
+}
+
+#collections_wrapper li:hover {
+  z-index: 1001;
+}
+
+#collections_wrapper li,
+#collections_wrapper a {
+  width: 60px;
+  height: 60px;
+  display: block;
 }
 
 #collections_wrapper a {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  overflow: hidden;
+  display: block;
+  overflow: visible;
+  background-repeat: no-repeat;
+  background-position: left;
   font-size: 0;
   line-height: 0;
   color: transparent;
+}
+
+#collections_wrapper a:hover {
+  background-position: center;
+}
+
+#collections_wrapper a.selected_category {
+  background-position: right;
+}
+
+/* Etiqueta al hover — igual que Kizi original (.category_title) */
+#collections_wrapper .category_title {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  width: 80px;
+  background: #c0e0ee;
+  border: 1px solid #3a789e;
+  z-index: 1000;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 1px 5px;
+  font-family: Oswald, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  color: #044267;
+  border-radius: 5px;
+  line-height: normal;
+  text-transform: none;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+#collections_wrapper a:hover .category_title {
+  display: block;
 }
 
 #collections_wrapper [id$='-wrap'] {
@@ -50,6 +97,8 @@
   width: 60px;
   height: 60px;
   pointer-events: none;
+  position: relative;
+  z-index: 1;
 }
 
 #collections_wrapper [id$='-icon'] {

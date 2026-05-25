@@ -1,7 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import type { Game } from '../../types/game'
 import type { KiziLayoutMetrics } from '../../hooks/useKiziLayout'
-import { PLAY_PAGE_GAME_META, PLAY_PAGE_GAME_SLUG } from '../../config/play-page-game'
 import { useGameContext } from '../../context/GameContext'
 import { KIZI_UI } from '../../utils/kiziAssets'
 import './GameCard.css'
@@ -20,7 +19,7 @@ export default function GameCard({ game, layout }: GameCardProps) {
 
   return (
     <div
-      className={`box${game.large ? ' large' : ''}`}
+      className={`box${game.large ? ' large' : ''}${game.playable ? '' : ' box--uninstalled'}`}
       style={{
         width: size,
         height: size,
@@ -30,14 +29,15 @@ export default function GameCard({ game, layout }: GameCardProps) {
     >
       <Link
         to="/games/$slug"
-        params={{ slug: PLAY_PAGE_GAME_SLUG }}
+        params={{ slug: game.slug }}
         className="thumb"
         style={{ width: size, height: size }}
+        title={game.name}
         onClick={() =>
           setSelectedGame({
-            slug: PLAY_PAGE_GAME_SLUG,
-            name: PLAY_PAGE_GAME_META.name,
-            thumb: PLAY_PAGE_GAME_META.thumb || game.thumb,
+            slug: game.slug,
+            name: game.name,
+            thumb: game.thumb,
           })
         }
       >

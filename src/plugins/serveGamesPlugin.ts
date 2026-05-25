@@ -41,6 +41,14 @@ function resolveMimeType(filePath: string): string {
     return JS_MIME
   }
 
+  if (ext === '.crdownload' && /\.swf/i.test(lower)) {
+    return 'application/x-shockwave-flash'
+  }
+
+  if (ext === '.crdownload') {
+    return 'application/x-shockwave-flash'
+  }
+
   if (MIME[ext]) {
     return MIME[ext]
   }

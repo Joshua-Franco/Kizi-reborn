@@ -112,6 +112,22 @@
   object-fit: contain;
 }
 
+.play-game-unavailable {
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #0a1628;
+}
+
+.play-game-unavailable__msg {
+  margin: 0;
+  max-width: 420px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #b8d4e8;
+}
+
 .game_data_container .kizi_games_icon {
   float: left;
   width: 90px;

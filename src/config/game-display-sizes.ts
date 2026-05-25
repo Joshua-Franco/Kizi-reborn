@@ -17,7 +17,7 @@ const DEFAULTS: Record<DisplayContext, DisplaySize> = {
 
 /** slug del juego (carpeta en games_html5) → tamaños por pantalla */
 const BY_SLUG: Record<string, Partial<Record<DisplayContext, DisplaySize>>> = {
-  'fireboy-and-watergirl-7-and-friends': {
+  'fireboy-watergirl-7-and-friends': {
     play: { width: 900, height: 510 },
     home: { width: 720, height: 405 },
   },

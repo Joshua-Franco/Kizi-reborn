@@ -1,8 +1,7 @@
-import { Link, useNavigate, useParams } from '@tanstack/react-router'
+import { Link, useParams } from '@tanstack/react-router'
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import GamePlayer from '../../components/GamePlayer/GamePlayer'
 import { IconFullscreenEnter, IconFullscreenExit } from '../../components/PlayFullscreenIcons'
-import { PLAY_PAGE_GAME_SLUG } from '../../config/play-page-game'
 import {
   PLAY_FOOTER_GAP_TOP_PX,
   PLAY_GAME_SECTION_TOP_OFFSET_PX,
@@ -14,7 +13,7 @@ import {
   PLAY_WALKTHROUGH_GAP_TOP_PX,
 } from '../../config/play-page-layout'
 import { getGameDisplaySize } from '../../config/game-display-sizes'
-import { resolvePlayPageGameConfig } from '../../utils/gamePlayConfig'
+import { resolveGamePlayConfig } from '../../utils/gamePlayConfig'
 import { useGameContext } from '../../context/GameContext'
 import { PLAY_UI } from '../../utils/playUiAssets'
 import { useKiziLayout } from '../../hooks/useKiziLayout'
@@ -31,11 +30,10 @@ const WALKTHROUGH_VIDEO = 'https://www.youtube.com/embed/n4p8K_lq1eU'
 
 export default function Play() {
   const { slug: routeSlug } = useParams({ from: '/games/$slug' })
-  const navigate = useNavigate()
   const { selectedGame } = useGameContext()
   const game = useMemo(
-    () => resolvePlayPageGameConfig(selectedGame),
-    [selectedGame],
+    () => resolveGamePlayConfig(routeSlug, selectedGame),
+    [routeSlug, selectedGame],
   )
   const layout = useKiziLayout()
   const gameBoxRef = useRef<HTMLDivElement>(null)
@@ -51,8 +49,8 @@ export default function Play() {
     layout.gameDivWidth - layout.wrapperMargin * 2 - 24,
   )
   const displaySize = useMemo(
-    () => getGameDisplaySize(PLAY_PAGE_GAME_SLUG, 'play', maxGameWidth),
-    [maxGameWidth],
+    () => getGameDisplaySize(game.installSlug, 'play', maxGameWidth),
+    [game.installSlug, maxGameWidth],
   )
 
   const [fullscreenSize, setFullscreenSize] = useState(displaySize)
@@ -116,21 +114,11 @@ export default function Play() {
     }
   }
 
-  const hasPlayable = Boolean(game.html5Url || game.swfUrl)
+  const hasPlayable = game.playable && Boolean(game.html5Url || game.swfUrl)
 
   useEffect(() => {
     document.title = `${game.name} | Kizi - Online Games - Life Is Fun!`
   }, [game.name])
-
-  useEffect(() => {
-    if (routeSlug !== PLAY_PAGE_GAME_SLUG) {
-      navigate({
-        to: '/games/$slug',
-        params: { slug: PLAY_PAGE_GAME_SLUG },
-        replace: true,
-      })
-    }
-  }, [routeSlug, navigate])
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -296,8 +284,9 @@ export default function Play() {
                       height={activeGameSize.height}
                     />
                   ) : (
-                    <div className="play-game-preview">
+                    <div className="play-game-preview play-game-unavailable">
                       <img src={game.thumb} alt={game.name} />
+                      <p className="play-game-unavailable__msg">{game.description}</p>
                     </div>
                   )}
                 </div>

@@ -45,12 +45,13 @@ export default function Sidebar() {
           const imgSrc = images[Number(state) - 1]
 
           return (
-            <li key={cat.id} id={`category-${cat.id}`}>
+            <li key={cat.id} id={`category-${cat.id}`} className="collection">
               <Link
                 id={`category-${cat.id}-link`}
                 to="/"
                 title={cat.name}
                 aria-label={cat.name}
+                className={isSelected ? 'selected_category' : undefined}
                 onClick={() => setCurrentCategory(cat.id)}
                 rel="categorySidebar"
                 onMouseEnter={() => setHoveredId(cat.id)}
@@ -65,6 +66,7 @@ export default function Sidebar() {
                     alt=""
                   />
                 </span>
+                <div className="category_title">{cat.name}</div>
               </Link>
             </li>
           )

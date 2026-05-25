@@ -37,6 +37,14 @@ const RENAME_MAP = {
   'multiplayer-978206bf4a9520467fe7dde6aef62124.png': 'multiplayer.png',
 }
 
+/** Ya en disco con nombre legible; no renombrar */
+const SKIP_IF_DEST_EXISTS = new Set([
+  'join.png',
+  'join-hover.png',
+  'login.png',
+  'login-hover.png',
+])
+
 function renameFlashDownloads() {
   const flashDir = path.join(root, 'src', 'games', 'games_flashplayer')
   if (!fs.existsSync(flashDir)) return
@@ -57,7 +65,7 @@ function main() {
     const src = path.join(uiDir, from)
     const dest = path.join(uiDir, to)
     if (!fs.existsSync(src)) {
-      if (fs.existsSync(dest)) continue
+      if (fs.existsSync(dest) || SKIP_IF_DEST_EXISTS.has(to)) continue
       console.warn('skip (missing):', from)
       continue
     }

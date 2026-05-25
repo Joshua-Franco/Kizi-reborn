@@ -113,44 +113,42 @@
   font-size: 22px;
 }
 
-#user_info_box_container .signup {
-  cursor: pointer;
-  float: left;
-  height: 35px;
-  background: linear-gradient(to bottom, #ffd00c, #f0b800);
-  font-size: 15px;
-  color: #8e2b00;
-  line-height: 34px;
-  text-align: center;
-  padding: 0 10px;
-  border: 1px solid #8e2b00;
-  border-radius: 10px;
-  margin-top: 6px;
-  margin-left: 10px;
-}
-
-#user_info_box_container .signup:hover {
-  background: linear-gradient(to bottom, #ffe033, #ffc800);
-}
-
+/* Sign Up / Login — mismos assets y medidas que Kizi original (collections/join + login) */
+#user_info_box_container .signup,
 #user_info_box_container .login {
   cursor: pointer;
   float: left;
   height: 35px;
-  background: linear-gradient(to bottom, #0ea1ce, #0a7da3);
-  color: #ffffff;
-  line-height: 34px;
-  padding: 0 10px;
-  text-align: center;
-  border-radius: 10px;
-  font-size: 15px;
-  border: 1px solid #103154;
   margin-top: 6px;
   margin-left: 10px;
+  padding: 0 10px;
+  font-size: 15px;
+  line-height: 34px;
+  text-align: center;
+  border-radius: 10px;
+  box-sizing: border-box;
+  user-select: none;
+  white-space: nowrap;
+}
+
+#user_info_box_container .signup {
+  background: var(--kizi-join-btn) repeat-x;
+  color: #8e2b00;
+  border: 1px solid #8e2b00;
+}
+
+#user_info_box_container .signup:hover {
+  background: var(--kizi-join-btn-hover) repeat-x #ffd00c;
+}
+
+#user_info_box_container .login {
+  background: var(--kizi-login-btn) repeat-x;
+  color: #ffffff;
+  border: 1px solid #103154;
 }
 
 #user_info_box_container .login:hover {
-  background: linear-gradient(to bottom, #1bb8e8, #0e90b8);
+  background: var(--kizi-login-btn-hover) repeat-x;
 }
 
 #usr_exp_bar {

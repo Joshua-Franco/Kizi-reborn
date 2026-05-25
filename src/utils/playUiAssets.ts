@@ -16,8 +16,7 @@ export const PLAY_UI = {
   youtubeSubscribe: KIZI_UI.youtubeSubscribe,
   backToGame: KIZI_UI.backToGame,
   thumbFbw2:
-    gameThumbBySlug('fireboy-and-watergirl-the-light-temple') ??
-    gameThumbBySlug('thumb150-fbwg2-150x150') ??
-    gameThumbBySlug('thumb150-fireboy-and-watergirl-7-and-friends-150x150') ??
+    gameThumbBySlug('fireboy-watergirl-2-light-temple') ??
+    gameThumbBySlug('fireboy-watergirl-7-and-friends') ??
     '',
 } as const

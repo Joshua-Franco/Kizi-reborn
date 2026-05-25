@@ -1,16 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { GameEngine } from '../../utils/gamePlayConfig'
+import { ensureRuffleLoaded } from '../../utils/ruffleLoader'
 import './GamePlayer.css'
-
-declare global {
-  interface Window {
-    RufflePlayer?: {
-      newest: () => {
-        createPlayer: () => RufflePlayerElement
-      }
-    }
-  }
-}
 
 interface RufflePlayerElement extends HTMLElement {
   width: number | string
@@ -37,26 +28,39 @@ export default function GamePlayer({
   height,
 }: GamePlayerProps) {
   const hostRef = useRef<HTMLDivElement>(null)
+  const [flashError, setFlashError] = useState<string | null>(null)
 
   useEffect(() => {
     if (engine !== 'flash' || !swfUrl || !hostRef.current) return
 
     const host = hostRef.current
     let cancelled = false
+    setFlashError(null)
 
-    void import('@ruffle-rs/ruffle').then(() => {
-      if (cancelled || !hostRef.current) return
-      host.innerHTML = ''
+    void ensureRuffleLoaded()
+      .then(() => {
+        if (cancelled || !hostRef.current) return
+        host.innerHTML = ''
 
-      const ruffle = window.RufflePlayer?.newest()
-      const player = ruffle?.createPlayer()
-      if (!player) return
+        const ruffle = window.RufflePlayer?.newest()
+        const player = ruffle?.createPlayer() as RufflePlayerElement | undefined
+        if (!player) {
+          setFlashError('Ruffle no está disponible.')
+          return
+        }
 
-      player.style.width = '100%'
-      player.style.height = '100%'
-      host.appendChild(player)
-      player.load(swfUrl)
-    })
+        player.style.width = '100%'
+        player.style.height = '100%'
+        host.appendChild(player)
+        player.load(swfUrl)
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) {
+          setFlashError(
+            err instanceof Error ? err.message : 'Error al cargar Ruffle.',
+          )
+        }
+      })
 
     return () => {
       cancelled = true
@@ -101,6 +105,12 @@ export default function GamePlayer({
         } as React.CSSProperties
       }
       aria-label={title}
-    />
+    >
+      {flashError && (
+        <p className="game-player__flash-error" role="alert">
+          {flashError}
+        </p>
+      )}
+    </div>
   )
 }

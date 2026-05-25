@@ -9,9 +9,13 @@ export default function HomePage() {
   const { data: homepageData } = useHomepageGames()
   const { searchQuery } = useGameContext()
 
-  const filteredGames = homepageData?.games.filter((g) =>
-    g.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  )
+  const filteredGames = homepageData?.games.filter((g) => {
+    const q = searchQuery.toLowerCase()
+    return (
+      g.name.toLowerCase().includes(q) ||
+      g.fileName.toLowerCase().includes(q)
+    )
+  })
 
   return (
     <div className="homepage-wrapper">

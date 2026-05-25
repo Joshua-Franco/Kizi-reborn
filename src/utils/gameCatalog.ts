@@ -1,17 +1,22 @@
 import {
+  displayNameFromSlug,
+  fileNameFromSlug,
   fileNameToDisplayName,
+  fileNameToLabel,
   fileNameToSlug,
   gameThumb,
   gameThumbBySlug,
   listGameThumbFiles,
 } from './assetCatalog'
-import type { GameEngine } from './gamePlayConfig'
+import type { GameEngine } from '../types/game'
 
 export const GAME_FILES_BASE = '/game-files'
 
 const htmlGlobPaths = Object.keys(
   import.meta.glob('../games/games_html5/**/*.html', { eager: false }),
 )
+
+const htmlAllPaths = htmlGlobPaths
 
 const flashGlobPaths = Object.keys(
   import.meta.glob('../games/games_flashplayer/**/*.{swf,crdownload}', { eager: false }),
@@ -50,6 +55,17 @@ function folderNameFromHtmlGlob(globPath: string): string {
   return parts.length >= 2 ? parts[parts.length - 2] : parts[0] ?? ''
 }
 
+function pickHtml5EntryUrl(folder: string, mainGlobPath: string): string {
+  const playEmbed = htmlAllPaths.find(
+    (p) =>
+      !p.includes('_files/') &&
+      folderNameFromHtmlGlob(p) === folder &&
+      fileNameFromGlob(p).toLowerCase() === 'play-embed.html',
+  )
+  if (playEmbed) return globToGameFilesUrl(playEmbed)
+  return globToGameFilesUrl(mainGlobPath)
+}
+
 function slugFromFolderName(folder: string): string {
   return folder
     .replace(/&/g, 'and')
@@ -80,7 +96,7 @@ export const HTML5_GAMES: InstalledHtml5Game[] = htmlGlobPaths
     return {
       slug,
       name: folder.replace(/_/g, ' ').trim(),
-      entryUrl: globToGameFilesUrl(globPath),
+      entryUrl: pickHtml5EntryUrl(folder, globPath),
       folder,
     }
   })
@@ -159,4 +175,10 @@ export function defaultHtml5Game(): InstalledHtml5Game | undefined {
   )
 }
 
-export { fileNameToDisplayName, fileNameToSlug }
+export {
+  displayNameFromSlug,
+  fileNameFromSlug,
+  fileNameToDisplayName,
+  fileNameToLabel,
+  fileNameToSlug,
+}

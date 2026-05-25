@@ -3,10 +3,11 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import { serveGamesPlugin } from './src/plugins/serveGamesPlugin'
+import { ruffleAssetsPlugin } from './src/plugins/ruffleAssetsPlugin'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), serveGamesPlugin()],
+  plugins: [react(), tailwindcss(), serveGamesPlugin(), ruffleAssetsPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

@@ -2,6 +2,14 @@
   float: left;
 }
 
+.box--uninstalled .thumb_image {
+  opacity: 0.72;
+}
+
+.box--uninstalled .thumb_overlay {
+  font-size: 11px;
+}
+
 .box .thumb {
   position: relative;
   overflow: hidden;
