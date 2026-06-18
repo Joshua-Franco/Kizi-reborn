@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ruffle-rs/ruffle':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
       '@tailwindcss/vite':
         specifier: ^4.3.0
         version: 4.3.0(vite@8.0.14(@types/node@24.12.4)(jiti@2.7.0))
@@ -336,8 +336,8 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
-  '@ruffle-rs/ruffle@0.2.0':
-    resolution: {integrity: sha512-3SgiTrl+q4cCROpWiKZIwXyrWBpxfSFB42sNUINq1X4IcLNy/lq00UBbIonMB99Onmo1nx91lWxkI83I2tMwvw==}
+  '@ruffle-rs/ruffle@0.3.0':
+    resolution: {integrity: sha512-rGjP1SJWDr3esxBr1DUa9twvVwvO9XQDZctyWN0wveDPYIu9rd8K742U+7XA9PFife3Wx3gbSRfFaQtiy0ywpA==}
 
   '@tailwindcss/node@4.3.0':
     resolution: {integrity: sha512-aFb4gUhFOgdh9AXo4IzBEOzBkkAxm9VigwDJnMIYv3lcfXCJVesNfbEaBl4BNgVRyid92AmdviqwBUBRKSeY3g==}
@@ -1397,7 +1397,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.1': {}
 
-  '@ruffle-rs/ruffle@0.2.0': {}
+  '@ruffle-rs/ruffle@0.3.0': {}
 
   '@tailwindcss/node@4.3.0':
     dependencies:

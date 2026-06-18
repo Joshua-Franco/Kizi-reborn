@@ -12,7 +12,7 @@
     "normalize:assets": "node scripts/normalize-asset-names.mjs"
   },
   "dependencies": {
-    "@ruffle-rs/ruffle": "^0.2.0",
+    "@ruffle-rs/ruffle": "^0.3.0",
     "@tailwindcss/vite": "^4.3.0",
     "@tanstack/react-query": "^5.100.14",
     "@tanstack/react-router": "^1.170.8",
