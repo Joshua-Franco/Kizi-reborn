@@ -7,6 +7,7 @@ import { ruffleAssetsPlugin } from './src/plugins/ruffleAssetsPlugin'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/Kizi-reborn/',
   plugins: [react(), tailwindcss(), serveGamesPlugin(), ruffleAssetsPlugin()],
   resolve: {
     alias: {
