@@ -17,7 +17,7 @@ export const GAME_FILES_BASE = '/Kizi-reborn/games'
 const HTML5_GAME_FOLDERS: Array<{ folder: string; mainHtml: string }> = [
   {
     folder: 'Fireboy & Watergirl 7_ and Friends',
-    mainHtml: 'play-embed.html',
+    mainHtml: 'engine/index.html',
   },
 ]
 
