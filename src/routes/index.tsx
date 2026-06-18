@@ -21,7 +21,7 @@ export const gameRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([homeRoute, gameRoute])
 
-export const router = createRouter({ routeTree })
+export const router = createRouter({ routeTree, basepath: '/Kizi-reborn' })
 
 declare module '@tanstack/react-router' {
   interface Register {
