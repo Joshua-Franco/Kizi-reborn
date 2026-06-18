@@ -65,7 +65,7 @@ const GAME_THUMB_FILES = [
 ]
 
 const UI_BY_FILE = new Map(UI_FILES.map((f) => [f, `${BASE_URL}ui/${f}`]))
-const GAMES_BY_FILE = new Map(GAME_THUMB_FILES.map((f) => [f, `${BASE_URL}games_ui/${f}`]))
+const GAMES_BY_FILE = new Map(GAME_THUMB_FILES.map((f) => [f, `${BASE_URL}games/${f}`]))
 
 export function ui(fileName: string): string {
   const url = UI_BY_FILE.get(fileName)
