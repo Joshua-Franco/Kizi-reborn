@@ -28,7 +28,7 @@ A modern, high-performance replica of the iconic **Kizi (2016)** platform layout
 | **Performance** | `@tanstack/react-virtual` — grid virtualization |
 | **Tables** | `@tanstack/react-table` |
 | **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) via the new `@tailwindcss/vite` compiler plugin |
-| **Flash Emulation** | [Ruffle](https://ruffle.rs/) (`@ruffle-rs/ruffle`) — runs SWF files via WebAssembly once assets are provided |
+| **Flash Emulation** | [Ruffle](https://ruffle.rs/) (`@ruffle-rs/ruffle`) — runs SWF files via WebAssembly |
 
 ---
 
@@ -50,34 +50,31 @@ pnpm dev
 
 ## 🕹️ Game Emulation
 
-This project is prepared for a hybrid gaming environment:
-
-- **HTML5 Games** — run via standard iframes.
-- **Flash Games (.swf)** — integrated with Ruffle through WebAssembly.
-
-### ⚠️ Known Issue: Ruffle Configuration
-
-Ruffle requires specific asset-serving configurations to load the `.wasm` player correctly in Vite. Contributions to optimize the Vite + Ruffle bundler setup are welcome — feel free to open a Pull Request.
+- **HTML5 Games** — run via standard iframes pointing to local game files.
+- **Flash Games (.swf)** — integrated with Ruffle through WebAssembly, loaded lazily.
 
 ---
 
 ## 📁 Project Structure
 
 ```
-web-for-games/
-├── public/                  # Static assets (favicon, icons)
+Kizi-reborn/
+├── public/
+│   ├── ui/                      # UI images (logo, icons, flags, category buttons)
+│   ├── games_ui/                # Game thumbnail images (.jpg)
+│   └── games/
+│       ├── games_html5/         # HTML5 game folders (Fireboy & Watergirl 7)
+│       ├── games_flashplayer/   # .swf Flash game files
+│       └── games_unity/         # Unity WebGL game files
 ├── src/
-│   ├── assets/
-│   │   ├── games/           # Game thumbnail images (.jpg)
-│   │   └── ui/              # UI sprites (logo, icons, flags, category buttons)
 │   ├── components/
-│   │   ├── Layout/          # App shell (header + sidebar + outlet)
-│   │   ├── Header/          # Top bar (logo, user info, search, language)
-│   │   ├── Sidebar/         # Left category navigation (60px)
-│   │   ├── GameGrid/        # Responsive CSS Grid of game cards
-│   │   ├── GameCard/        # Individual game thumbnail with hover overlay
-│   │   ├── FeaturedGames/   # Featured game row
-│   │   ├── GamePlayer/      # HTML5 iframe / Ruffle Flash embed
+│   │   ├── Layout/              # App shell (header + sidebar + outlet)
+│   │   ├── Header/              # Top bar (logo, user info, search, language)
+│   │   ├── Sidebar/             # Left category navigation (60px)
+│   │   ├── GameGrid/            # Responsive CSS Grid of game cards
+│   │   ├── GameCard/            # Individual game thumbnail with hover overlay
+│   │   ├── FeaturedGames/       # Featured game row
+│   │   ├── GamePlayer/          # HTML5 iframe / Ruffle Flash embed
 │   │   └── PlayFullscreenIcons.tsx  # Fullscreen toggle SVG icons
 │   ├── config/
 │   │   ├── play-page-game.ts        # Default play page game config
@@ -85,47 +82,51 @@ web-for-games/
 │   │   ├── play-page-layout.ts      # Play page layout constants
 │   │   └── thumb-to-game-map.ts     # Maps thumb slugs to installed games
 │   ├── context/
-│   │   └── GameContext.tsx   # Global state (user, search, category, selection)
-│   ├── games/
-│   │   ├── games_html5/      # HTML5 game files (Fireboy & Watergirl 7)
-│   │   ├── games_flashplayer/ # 42 .swf Flash game files
-│   │   └── games_unity/      # Unity WebGL game files
+│   │   └── GameContext.tsx        # Global state (user, search, category, selection)
 │   ├── hooks/
-│   │   ├── useGames.ts       # TanStack Query hooks for game data
-│   │   └── useKiziLayout.ts  # Responsive grid layout calculations
+│   │   ├── useGames.ts           # TanStack Query hooks for game data
+│   │   └── useKiziLayout.ts      # Responsive grid layout calculations
 │   ├── pages/
-│   │   ├── HomePage/         # Main game grid homepage
-│   │   └── Play/             # Game detail/play page (route: /games/$slug)
+│   │   ├── HomePage/             # Main game grid homepage
+│   │   └── Play/                 # Game detail/play page (route: /games/$slug)
 │   ├── plugins/
-│   │   ├── serveGamesPlugin.ts    # Vite plugin: serves game files via /game-files/
-│   │   └── ruffleAssetsPlugin.ts  # Vite plugin: serves Ruffle .wasm assets
+│   │   └── ruffleAssetsPlugin.ts # Vite plugin: copies Ruffle .wasm assets to dist
 │   ├── routes/
-│   │   └── index.tsx         # TanStack Router setup (home + game detail routes)
+│   │   └── index.tsx             # TanStack Router setup (home + game detail routes)
 │   ├── services/
-│   │   └── gameService.ts    # Mock data service (simulates API fetch)
+│   │   └── gameService.ts        # Mock data service (simulates API fetch)
 │   ├── styles/
-│   │   └── global.css        # Base styles, Oswald font, Kizi color palette
+│   │   └── global.css            # Base styles, Oswald font, Kizi color palette
 │   ├── types/
-│   │   └── game.ts           # TypeScript interfaces (Game, Category, etc.)
+│   │   └── game.ts               # TypeScript interfaces (Game, Category, etc.)
 │   ├── utils/
-│   │   ├── assetCatalog.ts         # Vite glob-based asset resolver
-│   │   ├── constants.ts            # Category definitions, languages
-│   │   ├── fullscreen.ts           # Browser fullscreen API helpers
-│   │   ├── gameCatalog.ts          # Scans games/ for HTML5 & Flash files
-│   │   ├── gameFullscreenSize.ts   # Fullscreen scaling math
-│   │   ├── gamePlayConfig.ts       # Resolves full play config from slug
-│   │   ├── gameRegistry.ts         # Maps thumbs to installed games
-│   │   ├── kiziAssets.ts           # Kizi UI asset URL map
-│   │   ├── playUiAssets.ts         # Play page UI asset URL map
-│   │   └── ruffleLoader.ts         # Lazy-loads Ruffle script
-│   ├── App.tsx              # Root component (providers)
-│   ├── main.tsx             # Application entry point
-│   └── index.css            # Tailwind import
-├── index.html               # Vite HTML entry point
-├── vite.config.ts           # Vite configuration
-├── tsconfig.json            # TypeScript project references
-├── tsconfig.app.json        # TypeScript config (app)
-├── tsconfig.node.json       # TypeScript config (Node)
-├── eslint.config.js         # ESLint flat config
-└── package.json             # Dependencies & scripts
+│   │   ├── assetCatalog.ts       # Static asset URL map (UI images, thumbnails)
+│   │   ├── constants.ts          # Category definitions, languages
+│   │   ├── fullscreen.ts         # Browser fullscreen API helpers
+│   │   ├── gameCatalog.ts        # Static manifest of installed HTML5 & Flash games
+│   │   ├── gameFullscreenSize.ts # Fullscreen scaling math
+│   │   ├── gamePlayConfig.ts     # Resolves full play config from slug
+│   │   ├── gameRegistry.ts       # Maps thumbs to installed games
+│   │   ├── kiziAssets.ts         # Kizi UI asset URL map
+│   │   ├── playUiAssets.ts       # Play page UI asset URL map
+│   │   └── ruffleLoader.ts       # Lazy-loads Ruffle script
+│   ├── App.tsx                   # Root component (providers)
+│   ├── main.tsx                  # Application entry point
+│   └── index.css                 # Tailwind import
+├── index.html                    # Vite HTML entry point
+├── vite.config.ts                # Vite configuration (base: /Kizi-reborn/)
+├── tsconfig.json                 # TypeScript project references
+├── tsconfig.app.json             # TypeScript config (app)
+├── tsconfig.node.json            # TypeScript config (Node)
+├── eslint.config.js              # ESLint flat config
+└── package.json                  # Dependencies & scripts
 ```
+
+---
+
+## 🏗️ Architecture Notes
+
+- **Assets** live entirely in `public/` — no import-time globs. URLs are hardcoded with the `/Kizi-reborn/` prefix.
+- **Game discovery** uses a static manifest (`gameCatalog.ts`) instead of filesystem scans — SWF files and HTML5 folders are listed explicitly.
+- **Ruffle** (`@ruffle-rs/ruffle`) is copied to `dist/ruffle/` at build time via a custom Vite plugin. The `.wasm` files are served as static assets.
+- The router basepath is set to `/Kizi-reborn` to match the GitHub Pages deployment path.
