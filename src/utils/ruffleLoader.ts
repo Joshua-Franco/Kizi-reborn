@@ -35,7 +35,7 @@ export function ensureRuffleLoaded(): Promise<void> {
   if (loadPromise) return loadPromise
 
   loadPromise = new Promise<void>((resolve, reject) => {
-    window.RufflePlayer = window.RufflePlayer ?? {}
+    window.RufflePlayer = window.RufflePlayer ?? ({} as any)
     window.RufflePlayer.config = {
       ...window.RufflePlayer.config,
       publicPath: rufflePublicPath(),
