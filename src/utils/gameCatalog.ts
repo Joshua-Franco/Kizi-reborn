@@ -60,6 +60,10 @@ const FLASH_SWF_FILES: string[] = [
   'Wheely7.swf',
   'Wheely6.swf',
   'Wheely8.swf',
+  'Sin confirmar 416396.swf',
+  'Sin confirmar 529313.swf',
+  'Sin confirmar 638635.swf',
+  'Sin confirmar 645090.swf',
 ]
 
 // ── URL builders ───────────────────────────────────────────────
@@ -134,17 +138,22 @@ const FLASH_BY_SLUG = new Map(FLASH_GAMES.map((g) => [g.slug, g]))
 
 // ── Lookup helpers ─────────────────────────────────────────────
 
+function normalizeSlug(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, '')
+}
+
 export function findHtml5Game(slug: string): InstalledHtml5Game | undefined {
   const direct = HTML5_BY_SLUG.get(slug)
   if (direct) return direct
 
   const lower = slug.toLowerCase()
+  const key = normalizeSlug(slug)
   return HTML5_GAMES.find(
     (g) =>
       g.slug === lower ||
-      g.slug.includes(lower) ||
-      lower.includes(g.slug) ||
-      g.folder.toLowerCase().includes(lower.replace(/-/g, ' ')),
+      normalizeSlug(g.slug) === key ||
+      normalizeSlug(g.slug).includes(key) ||
+      normalizeSlug(g.folder) === key,
   )
 }
 
@@ -153,8 +162,15 @@ export function findFlashGame(slug: string): InstalledFlashGame | undefined {
   if (direct) return direct
 
   const lower = slug.toLowerCase()
+  const key = normalizeSlug(slug)
   return FLASH_GAMES.find(
-    (g) => g.slug === lower || g.slug.includes(lower) || lower.includes(g.slug),
+    (g) =>
+      g.slug === lower ||
+      g.slug.includes(lower) ||
+      normalizeSlug(g.slug) === key ||
+      normalizeSlug(g.slug).includes(key) ||
+      normalizeSlug(g.name) === key ||
+      normalizeSlug(g.name).includes(key),
   )
 }
 
