@@ -4,7 +4,7 @@ export interface Game {
   new?: boolean
   /** Nombre exacto del archivo de thumb (sin extensión). */
   name: string
-  /** Archivo en src/assets/games (ej. candy-rain.jpg). */
+  /** Archivo de thumbnail en public/games_ui (ej. candy-rain.jpg). */
   fileName: string
   /** Slug de ruta /games/:slug (derivado del fileName). */
   slug: string

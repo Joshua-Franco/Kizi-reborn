@@ -10,60 +10,67 @@ import {
 } from './assetCatalog'
 import type { GameEngine } from '../types/game'
 
-export const GAME_FILES_BASE = '/game-files'
+export const GAME_FILES_BASE = '/Kizi-reborn/games'
 
-const htmlGlobPaths = Object.keys(
-  import.meta.glob('../games/games_html5/**/*.html', { eager: false }),
-)
+// ── Static manifest ────────────────────────────────────────────
 
-const htmlAllPaths = htmlGlobPaths
+const HTML5_GAME_FOLDERS: Array<{ folder: string; mainHtml: string }> = [
+  {
+    folder: 'Fireboy & Watergirl 7_ and Friends',
+    mainHtml: 'play-embed.html',
+  },
+]
 
-const flashGlobPaths = Object.keys(
-  import.meta.glob('../games/games_flashplayer/**/*.{swf,crdownload}', { eager: false }),
-)
+const FLASH_SWF_FILES: string[] = [
+  'papascheeseria_102.swf',
+  'papasburgeria.swf',
+  'papasbakeria.swf',
+  'papalouie_v2.swf',
+  'PapaLouie3.swf',
+  'PapaLouie2.swf',
+  'Mario_Combat.swf',
+  'jacksmith.swf',
+  'duck-life-4_20210406.swf',
+  'cactusmccoy2.swf',
+  'cactusmccoy.swf',
+  'papaspastaria (1).swf',
+  'papaspancakeria.swf',
+  'papaspancakeria (1).swf',
+  'papashotdoggeria.swf',
+  'papashotdoggeria (1).swf',
+  'papasfreezeria.swf',
+  'papasdonuteria.swf',
+  'papascupcakeria.swf',
+  'papasscooperia_v102.swf',
+  'papaspizzeria_v2.swf',
+  'papaspastaria.swf',
+  'snail-bob-2.swf',
+  'snail-bob-3.swf',
+  'snail-bob-6-winter-story.swf',
+  'snail-bob-5-love-story.swf',
+  'snail-bob-7-fantasy-story.swf',
+  'snail-bob-8-island-story.swf',
+  'snail-bob-space.swf',
+  'snail-bob.swf',
+  'Wheely.swf',
+  'Wheely2.swf',
+  'Wheely5.swf',
+  'Wheely4.swf',
+  'Wheely3.swf',
+  'Wheely7.swf',
+  'Wheely6.swf',
+  'Wheely8.swf',
+]
 
-function isMainHtml5Entry(globPath: string): boolean {
-  if (globPath.includes('_files/')) return false
-  const lower = globPath.toLowerCase()
-  if (
-    lower.includes('ads') ||
-    lower.includes('saved_resource') ||
-    lower.includes('bridge') ||
-    lower.includes('zrt_lookup') ||
-    lower.includes('aframe')
-  ) {
-    return false
-  }
-  const file = fileNameFromGlob(globPath)
-  const parts = globPath.split(/[/\\]/)
-  const folder = parts[parts.length - 2] ?? ''
-  const base = file.replace(/\.html$/i, '')
-  return base === folder || file.endsWith('.html') && !parts.includes('Nueva carpeta')
+// ── URL builders ───────────────────────────────────────────────
+
+function html5GameUrl(folder: string, file: string): string {
+  const parts = ['games_html5', folder, file]
+  return `${GAME_FILES_BASE}/${parts.map(encodeURIComponent).join('/')}`
 }
 
-function fileNameFromGlob(globPath: string): string {
-  return globPath.split(/[/\\]/).pop() ?? globPath
-}
-
-function globToGameFilesUrl(globPath: string): string {
-  const rel = globPath.replace(/^\.\.\/games\//, '').replace(/\\/g, '/')
-  return `${GAME_FILES_BASE}/${rel.split('/').map(encodeURIComponent).join('/')}`
-}
-
-function folderNameFromHtmlGlob(globPath: string): string {
-  const parts = globPath.replace(/^\.\.\/games\/games_html5\//, '').split(/[/\\]/)
-  return parts.length >= 2 ? parts[parts.length - 2] : parts[0] ?? ''
-}
-
-function pickHtml5EntryUrl(folder: string, mainGlobPath: string): string {
-  const playEmbed = htmlAllPaths.find(
-    (p) =>
-      !p.includes('_files/') &&
-      folderNameFromHtmlGlob(p) === folder &&
-      fileNameFromGlob(p).toLowerCase() === 'play-embed.html',
-  )
-  if (playEmbed) return globToGameFilesUrl(playEmbed)
-  return globToGameFilesUrl(mainGlobPath)
+function flashSwfUrl(fileName: string): string {
+  return `${GAME_FILES_BASE}/games_flashplayer/${encodeURIComponent(fileName)}`
 }
 
 function slugFromFolderName(folder: string): string {
@@ -73,6 +80,17 @@ function slugFromFolderName(folder: string): string {
     .replace(/^-|-$/g, '')
     .toLowerCase()
 }
+
+function slugFromFlashFile(fileName: string): string {
+  return fileName
+    .replace(/\.(swf|crdownload)$/i, '')
+    .replace(/&/g, 'and')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .toLowerCase()
+}
+
+// ── Exported interfaces ────────────────────────────────────────
 
 export interface InstalledHtml5Game {
   slug: string
@@ -88,38 +106,33 @@ export interface InstalledFlashGame {
   fileName: string
 }
 
-export const HTML5_GAMES: InstalledHtml5Game[] = htmlGlobPaths
-  .filter(isMainHtml5Entry)
-  .map((globPath) => {
-    const folder = folderNameFromHtmlGlob(globPath)
-    const slug = slugFromFolderName(folder)
-    return {
-      slug,
-      name: folder.replace(/_/g, ' ').trim(),
-      entryUrl: pickHtml5EntryUrl(folder, globPath),
-      folder,
-    }
-  })
+// ── Built from static manifest ─────────────────────────────────
+
+export const HTML5_GAMES: InstalledHtml5Game[] = HTML5_GAME_FOLDERS.map((entry) => {
+  const slug = slugFromFolderName(entry.folder)
+  return {
+    slug,
+    name: entry.folder.replace(/_/g, ' ').trim(),
+    entryUrl: html5GameUrl(entry.folder, entry.mainHtml),
+    folder: entry.folder,
+  }
+})
 
 const HTML5_BY_SLUG = new Map(HTML5_GAMES.map((g) => [g.slug, g]))
 
-export const FLASH_GAMES: InstalledFlashGame[] = flashGlobPaths.map((globPath) => {
-  const fileName = fileNameFromGlob(globPath)
-  const base = fileName.replace(/\.(swf|crdownload)$/i, '')
-  const slug = base
-    .replace(/&/g, 'and')
-    .replace(/[^a-zA-Z0-9]+/g, '-')
-    .replace(/^-|-$/g, '')
-    .toLowerCase()
+export const FLASH_GAMES: InstalledFlashGame[] = FLASH_SWF_FILES.map((fileName) => {
+  const slug = slugFromFlashFile(fileName)
   return {
     slug,
-    name: base,
-    swfUrl: globToGameFilesUrl(globPath),
+    name: fileName.replace(/\.(swf|crdownload)$/i, ''),
+    swfUrl: flashSwfUrl(fileName),
     fileName,
   }
 })
 
 const FLASH_BY_SLUG = new Map(FLASH_GAMES.map((g) => [g.slug, g]))
+
+// ── Lookup helpers ─────────────────────────────────────────────
 
 export function findHtml5Game(slug: string): InstalledHtml5Game | undefined {
   const direct = HTML5_BY_SLUG.get(slug)

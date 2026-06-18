@@ -63,7 +63,7 @@ const GAME_THUMB_FILES = [
 ]
 
 const UI_BY_FILE = new Map(UI_FILES.map((f) => [f, `/Kizi-reborn/ui/${f}`]))
-const GAMES_BY_FILE = new Map(GAME_THUMB_FILES.map((f) => [f, `/Kizi-reborn/games/${f}`]))
+const GAMES_BY_FILE = new Map(GAME_THUMB_FILES.map((f) => [f, `/Kizi-reborn/games_ui/${f}`]))
 
 export function ui(fileName: string): string {
   const url = UI_BY_FILE.get(fileName)

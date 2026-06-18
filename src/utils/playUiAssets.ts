@@ -1,4 +1,4 @@
-/** UI Play: nombres reales en src/assets/ui (ver assetCatalog.ts) */
+/** UI Play: rutas resueltas desde public/ui via assetCatalog */
 
 import { KIZI_UI } from './kiziAssets'
 import { gameThumbBySlug, ui } from './assetCatalog'

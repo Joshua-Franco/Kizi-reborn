@@ -1,4 +1,4 @@
-/** Assets Kizi: rutas resueltas por nombre real de archivo en src/assets/ui */
+/** Assets Kizi: rutas resueltas desde public/ui via assetCatalog */
 
 import { categoryIconUrls, ui, uiByPrefix } from './assetCatalog'
 
