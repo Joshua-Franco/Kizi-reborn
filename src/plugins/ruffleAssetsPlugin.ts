@@ -12,7 +12,8 @@ function listRuffleAssetFiles(): string[] {
   return fs.readdirSync(source).filter(
     (name) =>
       name === 'ruffle.js' ||
-      (name.startsWith('core.ruffle.') && name.endsWith('.js')),
+      (name.startsWith('core.ruffle.') && name.endsWith('.js')) ||
+      name.endsWith('.wasm'),
   )
 }
 
@@ -30,6 +31,11 @@ function copyRuffleTo(targetDir: string): void {
   }
 }
 
+const RUFFLE_MIME: Record<string, string> = {
+  '.js': 'application/javascript; charset=utf-8',
+  '.wasm': 'application/wasm',
+}
+
 function sendRuffleFile(
   filePath: string,
   res: import('http').ServerResponse,
@@ -40,7 +46,8 @@ function sendRuffleFile(
       next()
       return
     }
-    res.setHeader('Content-Type', 'application/javascript; charset=utf-8')
+    const ext = path.extname(filePath).toLowerCase()
+    res.setHeader('Content-Type', RUFFLE_MIME[ext] ?? 'application/octet-stream')
     fs.createReadStream(filePath).pipe(res)
   })
 }
@@ -53,7 +60,8 @@ export function ruffleAssetsPlugin(): Plugin {
     name: 'ruffle-assets',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        const url = req.url?.split('?')[0] ?? ''
+        const base = server.config.base || '/'
+        const url = (req.url?.split('?')[0] ?? '').replace(new RegExp(`^${base}`), '/')
         if (!url.startsWith('/ruffle/')) return next()
 
         const rel = decodeURIComponent(url.slice('/ruffle/'.length))

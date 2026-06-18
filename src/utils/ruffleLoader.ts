@@ -25,12 +25,8 @@ function ruffleScriptUrl(): string {
 export function ensureRuffleLoaded(): Promise<void> {
   if (typeof window === 'undefined') return Promise.resolve()
 
-  try {
-    window.RufflePlayer?.newest()
-    return Promise.resolve()
-  } catch {
-    /* aún no cargado */
-  }
+const existingRuffle = window.RufflePlayer?.newest()
+if (existingRuffle) return Promise.resolve()
 
   if (loadPromise) return loadPromise
 
