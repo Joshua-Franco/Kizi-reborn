@@ -13,20 +13,20 @@ let loadPromise: Promise<void> | null = null
 
 function rufflePublicPath(): string {
   const base = import.meta.env.BASE_URL || '/'
-  return new URL('ruffle/', base).href
+  return `${base}ruffle/`
 }
 
 function ruffleScriptUrl(): string {
   const base = import.meta.env.BASE_URL || '/'
-  return new URL('ruffle/ruffle.js', base).href
+  return `${base}ruffle/ruffle.js`
 }
 
 /** Carga Ruffle con publicPath absoluto (evita ChunkLoadError en /games/:slug). */
 export function ensureRuffleLoaded(): Promise<void> {
   if (typeof window === 'undefined') return Promise.resolve()
 
-const existingRuffle = window.RufflePlayer?.newest()
-if (existingRuffle) return Promise.resolve()
+  const existingRuffle = window.RufflePlayer?.newest()
+  if (existingRuffle) return Promise.resolve()
 
   if (loadPromise) return loadPromise
 
