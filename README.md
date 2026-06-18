@@ -1,6 +1,6 @@
-# 🎮 Web for Games — Kizi 2019 Replica
+# 🎮 Kizi reborn — Kizi 2016 Replica
 
-A modern, high-performance replica of the iconic **Kizi (2019)** platform layout, rebuilt from scratch with a cutting-edge web stack.
+A modern, high-performance replica of the iconic **Kizi (2016)** platform layout, rebuilt from scratch with a cutting-edge web stack.
 
 ---
 
@@ -43,7 +43,7 @@ cd web-for-games
 pnpm install
 
 # Add your own assets
-# Place recovered Kizi 2019 images and .swf files into the public/ folder
+# Place recovered Kizi 2016 images and .swf files into the public/ folder
 
 # Start the development server
 pnpm dev
