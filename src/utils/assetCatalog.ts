@@ -128,6 +128,11 @@ export function fileNameFromSlug(slug: string): string | undefined {
   return undefined
 }
 
+/** @deprecated Usar fileNameToLabel — mismo comportamiento. */
+export function fileNameToDisplayName(fileName: string): string {
+  return fileNameToLabel(fileName)
+}
+
 export function categoryIconUrls(categoryId: string): [string, string, string] {
   return [1, 2, 3].map((n) => ui(`${categoryId}(${n}).png`)) as [string, string, string]
 }
