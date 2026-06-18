@@ -1,5 +1,3 @@
-const BASE_URL = import.meta.env.BASE_URL
-
 const UI_FILES = [
   'action-arcade(1).png', 'action-arcade(2).png', 'action-arcade(3).png',
   'add-coins.png', 'alien(1).png', 'alien(2).png', 'alien(3).png',
@@ -64,8 +62,8 @@ const GAME_THUMB_FILES = [
   'wheely-6.jpg', 'wheely-7.jpg', 'wheely-8.jpg',
 ]
 
-const UI_BY_FILE = new Map(UI_FILES.map((f) => [f, `${BASE_URL}ui/${f}`]))
-const GAMES_BY_FILE = new Map(GAME_THUMB_FILES.map((f) => [f, `${BASE_URL}games/${f}`]))
+const UI_BY_FILE = new Map(UI_FILES.map((f) => [f, `/Kizi-reborn/ui/${f}`]))
+const GAMES_BY_FILE = new Map(GAME_THUMB_FILES.map((f) => [f, `/Kizi-reborn/games/${f}`]))
 
 export function ui(fileName: string): string {
   const url = UI_BY_FILE.get(fileName)
