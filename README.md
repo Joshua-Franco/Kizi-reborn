@@ -36,14 +36,11 @@ A modern, high-performance replica of the iconic **Kizi (2016)** platform layout
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/web-for-games.git
-cd web-for-games
+git clone https://github.com/Joshua-Franco/Kizi-reborn.git
+cd Kizi-reborn
 
 # Install dependencies
 pnpm install
-
-# Add your own assets
-# Place recovered Kizi 2016 images and .swf files into the public/ folder
 
 # Start the development server
 pnpm dev
